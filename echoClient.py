@@ -6,11 +6,11 @@ def echo_client(port, host):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_address = (host, port)
     sock.connect(server_address)
-    message = input("enter some text: ")
+    message = input("<PROTOCOL PHASE><WS><MEASUREMENT TYPE><WS><NUMBER OF PROBES><WS><MESSAGE SIZE><WS><SERVER DELAY>\n")
     sock.sendto(message.encode(), server_address)
     newMessage, server_address = sock.recvfrom(2048)
     print(newMessage.decode())
-    sock.close()
+    
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description = 'Server Socket')
