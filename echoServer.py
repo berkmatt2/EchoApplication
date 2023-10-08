@@ -52,7 +52,7 @@ def echo_server(port):
                 size = numBytes
                 delay = servDelay
                 if measurementType == "rtt":
-                    rtt(probes, size, delay, sock, server_address)
+                    rtt(probes, delay, sock, server_address)
             else:
                 response = "404 ERROR: Invalid Connection Setup Message"
                 client.send(response.encode())
