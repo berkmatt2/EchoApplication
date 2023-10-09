@@ -45,14 +45,11 @@ def echo_server(port):
                 isValid = False
                 
             if isValid == True:
-                response = "200 OK: Ready"
-                client.send(response.encode())
                 measurementType = splitMsg[1]
                 probes = numProbes
                 size = numBytes
                 delay = servDelay
-                if measurementType == "rtt":
-                    rtt(probes, delay, sock, server_address)
+                rtt(probes, delay, sock, server_address)
             else:
                 response = "404 ERROR: Invalid Connection Setup Message"
                 client.send(response.encode())
@@ -61,14 +58,16 @@ def echo_server(port):
 def rtt(numProbes, serverDelay, sock, server_address):
     probeNumber = 0
     delay = serverDelay / 1000
+    client, address = sock.accept()
+    response = "200 OK: Ready"
+    client.send(response.encode())
     while True:
-        client, address = sock.accept()
         data = client.recv(data_payload)
         if data:
             message = data.decode()
             splitMsg = message.split()
             newProbeNum = splitMsg[1]
-            if newProbeNum == probeNumber + 1 and newProbeNum <= numProbes:
+            if newProbeNum == (probeNumber + 1) and newProbeNum <= numProbes:
                 probeNumber += 1
                 time.sleep(delay)
                 client.send(data)
