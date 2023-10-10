@@ -44,8 +44,16 @@ def rtt(numProbes, payloadSize, probeID, socket, server_address):
     message = str(protocolPhase + " " + probeIDString + " " + payload + "\n")
     startTime = time.time()
     socket.sendto(message.encode(), server_address)
-    response, server_address2 = socket.recvfrom(35000)
-    if response.decode() == "404 ERROR: Invalid Measurement Message":
+    #response, server_address2 = socket.recvfrom(35000)
+    completeMessage = ""
+    while True:
+        data, server_address2 = socket.recvfrom(35000)
+        temp = data.decode()
+        completeMessage += temp
+        if "\n" in completeMessage:
+            break
+    print(completeMessage)
+    if completeMessage == "404 ERROR: Invalid Measurement Message":
         return -500
     endTime = time.time()
     totalTime = endTime - startTime

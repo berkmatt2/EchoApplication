@@ -109,21 +109,28 @@ def rtt(numProbes, serverDelay, sock, server_address, client):
     response = "200 OK: Ready"
     client.send(response.encode())
     while True:
-        data = client.recv(35000)
-        if data:
-            message = data.decode()
-            splitMsg = message.split()
-            newProbeNum = int(splitMsg[1])
-            print(newProbeNum)
-            if newProbeNum == (probeNumber + 1) and newProbeNum <= numProbes:
-                probeNumber += 1
-                time.sleep(delay)
-                client.send(data)
-            else:
-                message = "404 ERROR: Invalid Measurement Message"
-                client.send(message.encode())
-            if newProbeNum == numProbes:
-                return
+        completeMessage = ""
+        while True:
+            data = client.recv(35000)
+            temp = data.decode()
+            completeMessage += temp
+            if "\n" in completeMessage:
+                break
+        
+        #data = client.recv(35000)
+        message = completeMessage
+        splitMsg = message.split()
+        newProbeNum = int(splitMsg[1])
+        print(newProbeNum)
+        if newProbeNum == (probeNumber + 1) and newProbeNum <= numProbes:
+            probeNumber += 1
+            time.sleep(delay)
+            client.send(data)
+        else:
+            message = "404 ERROR: Invalid Measurement Message"
+            client.send(message.encode())
+        if newProbeNum == numProbes:
+            return
             
                 
                 
