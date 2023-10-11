@@ -57,7 +57,7 @@ def echo_client(port, host):
                 totalTime += result
                 
             #average the RTT, take the total time (total time for x probes) and divide by num probes    
-            roundTripTime = totalTime / numProbes
+            roundTripTime = (totalTime * 1000) / numProbes
             
             #based on measurement type, print the RTT or calculate the throughput and print that
             if measureType == "rtt":
