@@ -1,9 +1,13 @@
 COMPILATION INSTRUCTIONS
+These instructions are for running the programs in Powershell, CMD, or another similar application. 
+The two python files must be run in seperate windows of these applications (i.e. CMD, Powershell)
+To begin, download pythonServer.py and pythonClient.py and use CMD or another application to navigate
+into the directory containing the given files.
 
 For pythonServer.py:
 
 1. Ensure that you are in the directory containing pythonServer.py
-2. Type "python pythonServer.py --port <PORT NUMBER (int)>" without quotes and where <PORT NUMBER (int)> is an integer betweeen 58000-58999
+2. Type "python pythonServer.py --port <PORT NUMBER (int)>" without quotes and where <PORT NUMBER (int)> is an integer representing a TCP port
 3. The server should now be waiting for messages from the client
 
 For pythonClient.py:
