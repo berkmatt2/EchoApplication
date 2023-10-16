@@ -14,4 +14,8 @@ the RTT and throughput of a given message.
 
 This README does not include instructions on running the programs. I have included two seperate
 README files. part1README will give instructions on running pythonClient and pythonServer. 
-part2README will give instructions on running the echoClient and echoServer files.
+part2README will give instructions on running the echoClient and echoServer files. I have also
+included a PDF file called "EchoApplication Tests and Results" which is a writeup detailing my 
+design and the various tests I ran on the two programs. It also includes data graphs detailing
+the relationship between packet size and RTT, packet size and Throughput, server delay and RTT,
+and server delay and throughput.
